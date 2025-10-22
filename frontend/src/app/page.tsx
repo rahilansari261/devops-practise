@@ -125,7 +125,7 @@ export default function Home() {
 
           {showForm && (
             <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-              <h2 className="text-xl font-semibold mb-4">
+              <h2 className="text-xl font-semibold mb-4 text-neutral-900">
                 {editingTask ? 'Edit Task' : 'Add New Task'}
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -137,7 +137,7 @@ export default function Home() {
                     type="text"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full text-neutral-700 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter task title"
                     required
                   />
@@ -149,7 +149,7 @@ export default function Home() {
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full text-neutral-700 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter task description"
                     rows={3}
                   />
