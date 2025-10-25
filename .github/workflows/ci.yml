@@ -35,11 +35,11 @@ jobs:
 
       - name: build backend image
         working-directory: backend
-        run: docker build -t devops-backend ./backend
+        run: docker build -t devops-backend .
 
       - name: build frontend image
         working-directory: frontend
-        run: docker build -t devops-frontend ./frontend
+        run: docker build -t devops-frontend .
 
       # - name: deploy
       #   run: docker-compose up -d
