@@ -42,7 +42,7 @@ jobs:
         run: docker build -t devops-frontend .
 
       - name: deploy
-        run: docker-compose up -d
+        run: docker compose up -d
 
 
 
