@@ -19,7 +19,8 @@ app.get('/api/tasks', async (req, res) => {
     });
     res.json(tasks);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch tasks' });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch tasks', details: error.message });
   }
 });
 
@@ -33,7 +34,8 @@ app.get('/api/tasks/:id', async (req, res) => {
     }
     res.json(task);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch task' });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch task', details: error.message });
   }
 });
 
@@ -52,6 +54,7 @@ app.post('/api/tasks', async (req, res) => {
     });
     res.status(201).json(task);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to create task' });
   }
 });
@@ -85,8 +88,9 @@ app.delete('/api/tasks/:id', async (req, res) => {
 });
 
 // Health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+app.get('/health', (req, res) => {  
+  console.log(process.env.DATABASE_URL);
+  res.json({ status: 'OK', timestamp: new Date().toISOString(), db_url: process.env.DATABASE_URL });
 });
 
 app.listen(PORT, () => {
@@ -94,6 +98,6 @@ app.listen(PORT, () => {
 });
 
 // Graceful shutdown
-process.on('beforeExit', async () => {
+process.on('beforeExit', async () => {  
   await prisma.$disconnect();
 });
