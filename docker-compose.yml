@@ -1,0 +1,48 @@
+
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: devops-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rahil
+      POSTGRES_PASSWORD: rahil12345
+      POSTGRES_DB: tasks-db2
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - devops-network
+
+  backend:
+    build: ./backend
+    container_name: devops-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://rahil:rahil12345@postgres:5432/tasks-db2
+    depends_on:
+      - postgres
+    ports:
+      - "3001:3001"
+    networks:
+      - devops-network
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    container_name: devops-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - devops-network
+
+volumes:
+  postgres_data:
+
+networks:
+  devops-network:
+    driver: bridge

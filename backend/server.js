@@ -72,6 +72,7 @@ app.put('/api/tasks/:id', async (req, res) => {
     });
     res.json(task);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to update task' });
   }
 });
@@ -83,6 +84,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
     });
     res.status(204).send();
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to delete task' });
   }
 });

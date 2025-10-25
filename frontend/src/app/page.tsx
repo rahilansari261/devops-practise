@@ -22,13 +22,13 @@ export default function Home() {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [formData, setFormData] = useState({
     title: '',
-    description: ''
+    description: '',
   });
 
   useEffect(() => {
     fetchTasks();
   }, []);
-
+  // const rahil = 'rahil';
   const fetchTasks = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/tasks`);
@@ -50,7 +50,7 @@ export default function Home() {
       } else {
         await axios.post(`${API_BASE_URL}/tasks`, formData);
       }
-      
+
       setFormData({ title: '', description: '' });
       setShowForm(false);
       setEditingTask(null);
@@ -64,14 +64,14 @@ export default function Home() {
     setEditingTask(task);
     setFormData({
       title: task.title,
-      description: task.description || ''
+      description: task.description || '',
     });
     setShowForm(true);
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this task?')) return;
-    
+
     try {
       await axios.delete(`${API_BASE_URL}/tasks/${id}`);
       fetchTasks();
@@ -83,7 +83,7 @@ export default function Home() {
   const handleToggleComplete = async (task: Task) => {
     try {
       await axios.put(`${API_BASE_URL}/tasks/${task.id}`, {
-        completed: !task.completed
+        completed: !task.completed,
       });
       fetchTasks();
     } catch (error) {
@@ -130,9 +130,7 @@ export default function Home() {
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Title *
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
                   <input
                     type="text"
                     value={formData.title}
