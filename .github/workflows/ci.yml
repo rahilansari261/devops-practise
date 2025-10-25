@@ -41,8 +41,8 @@ jobs:
         working-directory: frontend
         run: docker build -t devops-frontend .
 
-      # - name: deploy
-      #   run: docker-compose up -d
+      - name: deploy
+        run: docker-compose up -d
 
 
 
