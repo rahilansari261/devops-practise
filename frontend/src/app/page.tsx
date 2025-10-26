@@ -28,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     fetchTasks();
   }, []);
-  const rahil = 'rahil';
+
   const fetchTasks = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/tasks`);
